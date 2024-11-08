@@ -40,6 +40,9 @@ INSTALLED_APPS = [
     'users',
 ]
 
+
+AUTH_USER_MODEL = 'users.CustomUser'
+
 # Email settings
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.example.com'

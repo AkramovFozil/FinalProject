@@ -1,27 +1,9 @@
+from django.contrib.auth import login
+from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.core.mail import send_mail
 from .forms import CustomUserRegistrationForm
 from .models import CustomUser
-from django.contrib.auth import authenticate, login
-from django.shortcuts import redirect, render
-from django.contrib import messages
-
-
-def user_login(request):
-    if request.method == 'POST':
-        email = request.POST.get('email')
-        password = request.POST.get('password')
-        user = authenticate(request, email=email, password=password)
-
-        if user is not None:
-            if user.is_email_verified:
-                login(request, user)
-                return redirect('home')
-            else:
-                messages.error(request, "Email tasdiqlanmagan. Iltimos, emailni tasdiqlang.")
-        else:
-            messages.error(request, "Login yoki parol xato.")
-    return render(request, 'registration/login.html')
 
 
 def signup(request):
@@ -59,3 +41,5 @@ def verify_email(request, token):
             return render(request, 'registration/verification_success.html')
     except CustomUser.DoesNotExist:
         return render(request, 'registration/verification_failed.html')
+
+
