@@ -1,0 +1,12 @@
+from django.shortcuts import render
+from .models import UserProfile, Post
+from django.contrib.auth.models import User
+
+
+def profile_view(request, username):
+    user = User.objects.get(username=username)
+    profile = UserProfile.objects.get(user=user)
+    posts = Post.objects.filter(author=user)
+    return render(request, 'profiles/user_profile.html', {'profile': profile, 'posts': posts})
+
+

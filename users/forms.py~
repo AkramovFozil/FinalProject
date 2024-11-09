@@ -16,6 +16,6 @@ class CustomUserRegistrationForm(UserCreationForm):
 
     def clean_avatar(self):
         avatar = self.cleaned_data['avatar']
-        if avatar not avatar.cleaned_data.get('avatar'):
+        if not avatar:
             raise forms.ValidationError("Avatar is required")
         return avatar

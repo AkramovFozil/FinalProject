@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Blog Site{% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="flex flex-col min-h-screen bg-gray-100">
+    <!-- Navbar -->
+    <nav class="bg-white shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex">
+                    <div class="flex-shrink-0 flex items-center">
+                        <a href="" class="text-2xl font-bold text-indigo-600">BlogSite</a>
+                    </div>
+                    <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
+                        <a href="" class="text-gray-500 hover:text-gray-700">Home</a>
+                        <a href="" class="text-gray-500 hover:text-gray-700">All Posts</a>
+                        {% if request.user.is_authenticated %}
+                            <a href="" class="text-gray-500 hover:text-gray-700">Create Post</a>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="hidden sm:ml-6 sm:flex sm:items-center">
+                    {% if request.user.is_authenticated %}
+                        <form method="POST" action="">
+                            {% csrf_token %}
+                            <button type="submit" class="text-gray-500 hover:text-gray-700">Log Out</button>
+                        </form>
+                    {% else %}
+                        <a href="" class="text-gray-500 hover:text-gray-700 px-3 py-2 rounded-md text-sm font-medium">Login</a>
+                        <a href="" class="bg-indigo-600 text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-indigo-700">Register</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main content -->
+    <main class="flex-grow container mx-auto px-4 py-8">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white shadow-md mt-8">
+        <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+            <div class="text-gray-500 text-sm">
+                © 2024 BlogSite. All rights reserved.
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
